@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green API interface</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+<form method="GET" action="{% url 'get_data' %}">
+    <div class="input-group">
+        <input type="text" id="idInstance" name="idInstance" value="{{ request.GET.idInstance }}"
+               placeholder="idInstance">
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="apiTokenInstance" name="apiTokenInstance" value="{{ request.GET.apiTokenInstance }}"
+               placeholder="apiTokenInstance">
+    </div>
+
+    <div class="input-group">
+        <button type="submit" name="action" value="GetSettings">GetSettings</button>
+        <button type="submit" name="action" value="GetStateInstance">GetStateInstance</button>
+    </div>
+
+    <br><br>
+
+    <div class="input-group">
+        <input type="text" id="number" name="number" placeholder="Number">
+        <select name="domain" id="domain">
+            <option value="@c.us" selected>@c.us</option>
+            <option value="@g.us">@g.us</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="message" name="message" placeholder="Message">
+    </div>
+
+    <button type="submit" formaction="{% url 'send_message' %}">Send message</button>
+
+    <br><br>
+
+    <div class="input-group">
+        <input type="text" id="number_file" name="number_file" placeholder="Number">
+        <select name="domain_file" id="domain_file">
+            <option value="@c.us" selected>@c.us</option>
+            <option value="@g.us">@g.us</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <input type="text" id="path_file" name="path_file" placeholder="Path File">
+    </div>
+
+    <button type="submit" formaction="{% url 'send_file' %}">Send file</button>
+</form>
+
+<div class="output">
+    <h2>Ответ</h2>
+    <div>{{ data }}</div>
+</div>
+</body>
+</html>
